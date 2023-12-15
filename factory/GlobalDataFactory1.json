@@ -1,0 +1,9 @@
+{
+	"name": "GlobalDataFactory1",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bfc989fb-eeb9-408e-b7f0-d2352a4dd836",
+		"tenantId": "72d26295-b2dc-4d61-86be-d43d4901e7d0"
+	}
+}
