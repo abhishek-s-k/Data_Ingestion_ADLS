@@ -1,5 +1,5 @@
 {
-	"name": "Excel1",
+	"name": "Git_Excel",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "HttpServer1",
