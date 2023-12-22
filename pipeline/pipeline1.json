@@ -16,21 +16,54 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ExcelSource",
+						"type": "BinarySource",
 						"storeSettings": {
 							"type": "HttpReadSettings",
 							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
 						}
 					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "Git_Excel",
+						"referenceName": "Git_Binary",
 						"type": "DatasetReference",
 						"parameters": {
 							"baseURL": {
 								"value": "@pipeline().parameters.sourceBaseURL",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ADLS_Binary",
+						"type": "DatasetReference",
+						"parameters": {
+							"baseURL": {
+								"value": "@pipeline().parameters.targetBaseURL",
+								"type": "Expression"
+							},
+							"container": {
+								"value": "@pipeline().parameters.container",
+								"type": "Expression"
+							},
+							"directory": {
+								"value": "@pipeline().parameters.directory",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@pipeline().parameters.fileName",
 								"type": "Expression"
 							}
 						}
@@ -41,7 +74,23 @@
 		"parameters": {
 			"sourceBaseURL": {
 				"type": "string",
-				"defaultValue": "https://github.com/abhishek-s-k/Data_Ingestion_ADLS/tree/main/Data/Dental_Insurance_Dataset"
+				"defaultValue": "https://github.com/abhishek-s-k/Data_Ingestion_ADLS/tree/main/Data/Dental_Insurance_Dataset/"
+			},
+			"targetBaseURL": {
+				"type": "string",
+				"defaultValue": "https://globalstorageaccount.dfs.core.windows.net"
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "git-healthinsurance"
+			},
+			"directory": {
+				"type": "string",
+				"defaultValue": "individualInsurance"
+			},
+			"fileName": {
+				"type": "string",
+				"defaultValue": "Individual_Market_Dental2021.xlsx"
 			}
 		},
 		"annotations": []
