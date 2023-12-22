@@ -26,12 +26,24 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Excel1",
-						"type": "DatasetReference"
+						"referenceName": "Git_Excel",
+						"type": "DatasetReference",
+						"parameters": {
+							"baseURL": {
+								"value": "@pipeline().parameters.sourceBaseURL",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"sourceBaseURL": {
+				"type": "string",
+				"defaultValue": "https://github.com/abhishek-s-k/Data_Ingestion_ADLS/tree/main/Data/Dental_Insurance_Dataset"
+			}
+		},
 		"annotations": []
 	}
 }
