@@ -74,7 +74,7 @@
 		"parameters": {
 			"sourceBaseURL": {
 				"type": "string",
-				"defaultValue": "https://github.com/abhishek-s-k/Data_Ingestion_ADLS/tree/main/Data/Dental_Insurance_Dataset/"
+				"defaultValue": "https://github.com/abhishek-s-k/Data_Ingestion_ADLS/blob/main/Data/Dental_Insurance_Dataset/Individual_Market_Dental2021.xlsx"
 			},
 			"targetBaseURL": {
 				"type": "string",
