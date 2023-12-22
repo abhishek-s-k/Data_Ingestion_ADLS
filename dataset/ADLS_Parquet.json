@@ -1,0 +1,24 @@
+{
+	"name": "ADLS_Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"URL": "https://globalstorageaccount.dfs.core.windows.net"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Individual_Market_Dental2021",
+				"folderPath": "individualInsurance",
+				"fileSystem": "git-healthinsurance"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
