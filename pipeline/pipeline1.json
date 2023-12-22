@@ -26,9 +26,12 @@
 						}
 					},
 					"sink": {
-						"type": "BinarySink",
+						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
 						}
 					},
 					"enableStaging": false
@@ -47,26 +50,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ADLS_Binary",
-						"type": "DatasetReference",
-						"parameters": {
-							"baseURL": {
-								"value": "@pipeline().parameters.targetBaseURL",
-								"type": "Expression"
-							},
-							"container": {
-								"value": "@pipeline().parameters.container",
-								"type": "Expression"
-							},
-							"directory": {
-								"value": "@pipeline().parameters.directory",
-								"type": "Expression"
-							},
-							"fileName": {
-								"value": "@pipeline().parameters.fileName",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "ADLS_Parquet",
+						"type": "DatasetReference"
 					}
 				]
 			}
