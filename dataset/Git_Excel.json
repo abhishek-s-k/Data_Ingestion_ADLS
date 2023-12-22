@@ -14,11 +14,18 @@
 		"parameters": {
 			"baseURL": {
 				"type": "string"
+			},
+			"sheetName": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": {
+				"value": "@dataset().sheetName",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "HttpServerLocation"
 			}
