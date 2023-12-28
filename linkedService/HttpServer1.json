@@ -1,0 +1,18 @@
+{
+	"name": "HttpServer1",
+	"properties": {
+		"description": "Linked Service to connect to Git",
+		"parameters": {
+			"baseURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "@{linkedService().baseURL}",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
