@@ -3,71 +3,103 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+					"items": {
+						"value": "@pipeline().parameters.fileNameList",
+						"type": "Expression"
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy data1_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "Git_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"baseURL": {
+											"value": "@concat('https://raw.githubusercontent.com/abhishek-s-k/Data_Ingestion_ADLS/main/Data/Dental_Insurance_Dataset/',item(),'.csv')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "git-healthinsurance",
+										"directory": "insurance",
+										"fileName": {
+											"value": "@concat(item(),'.csv')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Git_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"baseURL": "https://raw.githubusercontent.com/abhishek-s-k/Data_Ingestion_ADLS/main/Data/Dental_Insurance_Dataset/Individual_Market_Dental2022.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ADLS_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"container": "git-healthinsurance",
-							"directory": "insurance",
-							"fileName": "Individual_Market_Dental2021.csv"
-						}
-					}
-				]
+					]
+				}
 			}
 		],
+		"parameters": {
+			"fileNameList": {
+				"type": "array",
+				"defaultValue": [
+					"Individual_Market_Dental2021",
+					"Individual_Market_Dental2022",
+					"Individual_Market_Dental2023",
+					"Individual_Market_Dental2024"
+				]
+			}
+		},
 		"annotations": []
 	}
 }
