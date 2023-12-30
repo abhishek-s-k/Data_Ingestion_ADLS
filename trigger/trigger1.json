@@ -28,13 +28,13 @@
 				"frequency": "Day",
 				"interval": 1,
 				"startTime": "2023-12-30T07:47:00",
-				"timeZone": "Central Standard Time",
+				"timeZone": "India Standard Time",
 				"schedule": {
 					"minutes": [
-						52
+						24
 					],
 					"hours": [
-						1
+						13
 					]
 				}
 			}
