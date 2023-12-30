@@ -1,0 +1,103 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "GlobalDataFactory1"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://globalstorageaccount.dfs.core.windows.net/"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().baseURL}"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_fileName": {
+			"type": "array",
+			"defaultValue": [
+				"Individual_Market_Dental2021",
+				"Individual_Market_Dental2022",
+				"Individual_Market_Dental2023",
+				"Individual_Market_Dental2024"
+			]
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_container": {
+			"type": "string",
+			"defaultValue": "git-healthinsurance"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_directory": {
+			"type": "string",
+			"defaultValue": "insurance"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "Individual_Market_Dental"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "GlobalDataFactory1_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"HttpServer1_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
+					},
+					"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_fileName": {
+						"value": "[parameters('trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_fileName')]"
+					},
+					"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_container": {
+						"value": "[parameters('trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_container')]"
+					},
+					"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_directory": {
+						"value": "[parameters('trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_directory')]"
+					},
+					"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_tableName": {
+						"value": "[parameters('trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_tableName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

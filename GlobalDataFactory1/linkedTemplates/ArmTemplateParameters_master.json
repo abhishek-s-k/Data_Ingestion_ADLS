@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "GlobalDataFactory1"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://globalstorageaccount.dfs.core.windows.net/"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "@{linkedService().baseURL}"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_fileName": {
+			"value": [
+				"Individual_Market_Dental2021",
+				"Individual_Market_Dental2022",
+				"Individual_Market_Dental2023",
+				"Individual_Market_Dental2024"
+			]
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_container": {
+			"value": "git-healthinsurance"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_directory": {
+			"value": "insurance"
+		},
+		"trigger1_properties_PL_MASTER_SOURCE_TO_SQL_parameters_tableName": {
+			"value": "Individual_Market_Dental"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
