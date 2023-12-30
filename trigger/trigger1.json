@@ -1,0 +1,32 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_MASTER_SOURCE_TO_SQL",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-12-30T07:47:00",
+				"timeZone": "Central Standard Time",
+				"schedule": {
+					"minutes": [
+						50
+					],
+					"hours": [
+						1
+					]
+				}
+			}
+		}
+	}
+}
