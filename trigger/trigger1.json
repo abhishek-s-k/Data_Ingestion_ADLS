@@ -8,6 +8,14 @@
 				"pipelineReference": {
 					"referenceName": "PL_MASTER_SOURCE_TO_SQL",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fileName": [
+						"Individual_Market_Dental2021",
+						"Individual_Market_Dental2022",
+						"Individual_Market_Dental2023",
+						"Individual_Market_Dental2024"
+					]
 				}
 			}
 		],
