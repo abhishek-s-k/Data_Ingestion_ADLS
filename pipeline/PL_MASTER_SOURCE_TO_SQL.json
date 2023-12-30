@@ -1,0 +1,88 @@
+{
+	"name": "PL_MASTER_SOURCE_TO_SQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "GIT_TO_ADLS",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_GIT_TO_ADLS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"fileNameList": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "ADLS_TO_SQL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "GIT_TO_ADLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_ADLS_TO_SQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"container": {
+							"value": "@pipeline().parameters.container",
+							"type": "Expression"
+						},
+						"directory": {
+							"value": "@pipeline().parameters.directory",
+							"type": "Expression"
+						},
+						"fileName": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						},
+						"tableName": {
+							"value": "@pipeline().parameters.tableName",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"fileName": {
+				"type": "array",
+				"defaultValue": [
+					"Individual_Market_Dental2021",
+					"Individual_Market_Dental2022",
+					"Individual_Market_Dental2023",
+					"Individual_Market_Dental2024"
+				]
+			},
+			"container": {
+				"type": "string",
+				"defaultValue": "git-healthinsurance"
+			},
+			"directory": {
+				"type": "string",
+				"defaultValue": "insurance"
+			},
+			"tableName": {
+				"type": "string",
+				"defaultValue": "Individual_Market_Dental"
+			}
+		},
+		"annotations": []
+	}
+}

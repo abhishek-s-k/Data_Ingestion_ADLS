@@ -1,0 +1,43 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_MASTER_SOURCE_TO_SQL",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fileName": [
+						"Individual_Market_Dental2021",
+						"Individual_Market_Dental2022",
+						"Individual_Market_Dental2023",
+						"Individual_Market_Dental2024"
+					],
+					"container": "git-healthinsurance",
+					"directory": "insurance",
+					"tableName": "Individual_Market_Dental"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-12-30T07:47:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						24
+					],
+					"hours": [
+						13
+					]
+				}
+			}
+		}
+	}
+}
